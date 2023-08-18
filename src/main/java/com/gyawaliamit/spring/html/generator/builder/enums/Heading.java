@@ -1,6 +1,6 @@
-package com.gyawaliamit.email.generator.builder.constant;
+package com.gyawaliamit.spring.html.generator.builder.enums;
 
-public enum HeadingConstants {
+public enum Heading {
 
     HEADING_1,
     HEADING_2,

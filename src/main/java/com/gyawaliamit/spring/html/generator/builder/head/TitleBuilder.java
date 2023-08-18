@@ -1,6 +1,4 @@
-package com.gyawaliamit.email.generator.builder.head;
-
-import com.gyawaliamit.email.generator.builder.HtmlBuilder;
+package com.gyawaliamit.spring.html.generator.builder.head;
 
 public class TitleBuilder {
     private StringBuilder content;
@@ -10,7 +8,7 @@ public class TitleBuilder {
     }
 
     public TitleBuilder build() {
-        this.content.append("</title");
+        this.content.append("</title>");
         return new TitleBuilder(content);
     }
     public static TitleBuilder builder() {
