@@ -1,8 +1,6 @@
 package com.gyawaliamit.spring.html.generator.builder.head;
 
 
-import com.gyawaliamit.spring.html.generator.builder.HtmlBuilder;
-
 public class HeadBuilder {
     private StringBuilder content;
     private TitleBuilder titleBuilder;
