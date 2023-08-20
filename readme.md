@@ -53,7 +53,6 @@ public static String buildTable() {
             .builder()
             .head(HeadBuilder
                     .builder()
-                    .title(TitleBuilder.builder().title("Hello World").build())
                     .build())
             .body(BodyBuilder.builder()
                     .table(TableBuilder.builder()
@@ -123,7 +122,7 @@ public static String buildTable() {
 
 
 This code will result for creating tables that will look like below.
-<!DOCTYPE html> <html><head><title>Hello World</title></head><body><table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;"><tr ><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr></table></body></html>
+<!DOCTYPE html> <html><head></head><body><table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;"><tr ><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr></table></body></html>
 
 ### Creating Links
 The above links will help you create links using spring-html-generator
@@ -132,7 +131,6 @@ String htmlContent = HtmlBuilder
         .builder()
         .head(HeadBuilder
                 .builder()
-                .title(TitleBuilder.builder().title("Hello World").build())
                 .build())
         .body(BodyBuilder.builder()
                 .ahref(AhrefBuilder.builder()
@@ -145,7 +143,7 @@ String htmlContent = HtmlBuilder
         .build();
 ```
 This code will generate corresponding html code that will create links and will look like below.
-<!DOCTYPE html> <html><head><title>Hello World</title></head><body><a href ="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a></body></html>
+<!DOCTYPE html> <html><head></head><body><a href ="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a></body></html>
 
 ### Creating Paragraphs
 
@@ -154,7 +152,6 @@ String htmlContent = HtmlBuilder
     .builder()
     .head(HeadBuilder
         .builder()
-        .title(TitleBuilder.builder().title("Hello World").build())
         .build())
     .body(BodyBuilder.builder()
         .paragraph(ParagraphBuilder.builder()
@@ -168,7 +165,7 @@ String htmlContent = HtmlBuilder
 return htmlContent;
 ```
 The above links will help you create paragraphs which will look like:
-<!DOCTYPE html> <html><head><title>Hello World</title></head><body><p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p></body></html>
+<!DOCTYPE html> <html><head></head><body><p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p></body></html>
 
 
 [..I will be adding more examples in the future ]
