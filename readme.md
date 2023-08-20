@@ -1,180 +1,32 @@
-# Spring HTML Generator
+# Socket Programming with Java
 
-## Introduction
+Socket Programming helps us to communicate with various computers running on a network. In Java, Socket programming can be either connection-oriented or connectionless. This project focuses on designing a connection-oriented application using the Client-Server model.
 
-Spring HTML Generator is a simple and lightweight Java application that empowers you to create HTML pages using the Builder pattern. This application is deliberately minimalistic, with no external dependencies other than Java itself. It has been crafted with a singular purpose: to facilitate the creation of HTML templates via Java code.
+In the Client-Server model, the Server has a unique IP Address and port number. The client attempts to establish a connection with the server using this port number and IP address. The server listens and accepts the connection. Once the connection is established, the Server can receive messages from the client and respond back to the client.
 
-## Table of Contents
+## Implementation
 
-- [Features](#features)
-- [Use Cases](#use-cases)
-- [Getting Started](#getting-started)
-- [Example](#example)
-- [Contributing](#contributing)
-- [License](#license)
+### Server
 
-## Features
+#### `server/Main.java`
 
-- **Builder Pattern**: Spring HTML Generator leverages the Builder pattern to construct HTML pages, providing a clean and intuitive way to generate dynamic HTML content programmatically.
+Main.java for the Server application binds to a specific port number using the ServerSocket Class. It creates a server socket and listens for a connection with the Client, accepting it. The ServerThread is instantiated and started. All threads are added to an ArrayList to allow multiple clients to send messages to each other.
 
-- **Lightweight**: This application is designed to be minimalistic and lightweight, ensuring that it doesn't introduce unnecessary complexity to your project.
+### `server/ServerThread.java`
 
-- **Dependency-Free**: You won't need to manage any external dependencies when using Spring HTML Generator. It relies solely on Java, making it easy to integrate into your existing Java projects.
+ServerThread.java receives sockets and a list of active threads from Main.java via its constructor. When the thread is started from Main, the run method is executed. The BufferedReader is used to receive information from the client, and PrintWriter is used to send information from the Server. The `printToAllClients()` method sends the output to each client in the thread.
 
-## Use Cases
+### Client
 
-Spring HTML Generator can be incredibly useful in various scenarios where you need to generate and serve HTML content from your backend:
+#### `client/Main.java`
 
-1. **Composing HTML Emails**: When you need to compose HTML emails dynamically and send them from your backend, this library simplifies the task by providing a structured way to create HTML templates.
+Main.java for the Client uses the Socket class to initiate a connection to a server by providing the IP address and port number. The Scanner is used to get input from the user and send the data to the server using the PrintWriter object.
 
-2. **Serving HTML Pages**: If your application serves HTML pages directly from the backend, Spring HTML Generator streamlines the process, making your code cleaner and more maintainable.
+#### `client/ClientThread.java`
 
-3. **Improving Readability**: Traditional approaches to generating HTML content within Java code often result in convoluted and hard-to-maintain code. Spring HTML Generator is designed with readability in mind, making it easier for developers to understand and maintain.
+ClientThread class is used to listen to responses from the server without getting blocked while reading from a Scanner. It uses BufferedReader to receive information from the client.
 
-## Getting Started
+This project helps you understand the concepts of networking and the Client-Server model.
 
-To get started with Spring HTML Generator, follow these steps:
-
-1. **Clone the Repository**: Clone this repository to your local machine.
-
-   ```shell
-   https://github.com/gyawaliamit7/spring-html-generator.git
-   ```
-
-
-## Examples
-
-### Creating Tables
-The following code will help to generate html content for tables using custom syles.
-
-```java
-public static String buildTable() {
-    String htmlContent = HtmlBuilder
-            .builder()
-            .head(HeadBuilder
-                    .builder()
-                    .build())
-            .body(BodyBuilder.builder()
-                    .table(TableBuilder.builder()
-                            .customStyle("border-collapse", "collapse")
-                            .customStyle("width", "80%")
-                            .customStyle("margin", "auto")
-                            .customStyle("border-radius", "8px")
-                            .customStyle("overflow", "hidden")
-                            .customStyle("box-shadow", "0 0 10px rgba(0, 0, 0, 0.2)")
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 1").build())
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 2").build())
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .customStyle("background-color", "#f2f2f2")
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .customStyle("background-color", "#f2f2f2")
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .build())
-                    .build())
-            .build();
-    return htmlContent;
-}
-```
-
-
-
-This code will result for creating tables that will look like below.
-```html
-<!DOCTYPE html> <html><head></head><body><table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;"><tr ><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr></table></body></html>
-```
-
-### Creating Links
-The above links will help you create links using spring-html-generator
-```java
-String htmlContent = HtmlBuilder
-        .builder()
-        .head(HeadBuilder
-                .builder()
-                .build())
-        .body(BodyBuilder.builder()
-                .ahref(AhrefBuilder.builder()
-                        .ahref("https://gyawaliamit.com/", "Test Link 2")
-                        .style(Styles.COLOR_RED)
-                        .style(Styles.TEXT_CENTER)
-                        .customStyle("font-size", "18px")
-                        .build())
-                .build())
-        .build();
-```
-This code will generate corresponding html code that will create links and will look like below.
-```html
-<!DOCTYPE html> <html><head></head><body><a href ="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a></body></html>
-```
-### Creating Paragraphs
-
-```java
-String htmlContent = HtmlBuilder
-    .builder()
-    .head(HeadBuilder
-        .builder()
-        .build())
-    .body(BodyBuilder.builder()
-        .paragraph(ParagraphBuilder.builder()
-            .paragraph("This is just a first paragraph")
-            .style(Styles.COLOR_RED)
-            .style(Styles.TEXT_CENTER)
-            .customStyle("font-size", "18px")
-            .build())
-        .build())
-    .build();
-return htmlContent;
-```
-The above links will help you create paragraphs which will look like:
-
-
-```html
-<!DOCTYPE html> <html><head></head><body><p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p></body></html>
-```
-
-[..I will be adding more examples in the future ]
-##  About Contribution
-Since this is an open-source project, if you want some sort of feature enhancement or to fix a bug, please feel free to raise an issue or create a pull request and help maintain the project.
+Hope this short article was helpful in understanding the fundamentals of networking with Java and the Client-Server model.
 
