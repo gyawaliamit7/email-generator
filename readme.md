@@ -38,7 +38,8 @@ To get started with Spring HTML Generator, follow these steps:
 1. **Clone the Repository**: Clone this repository to your local machine.
 
    ```shell
-   git clone https://github.com/your-username/java-html-builder.git
+   git clone https://github.com/your-username/jspring-html-generator.git
+
 
 
 ## Examples
