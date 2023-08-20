@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Java HTML Builder is a simple and lightweight Java application that empowers you to create HTML pages using the Builder pattern. This application is deliberately minimalistic, with no external dependencies other than Java itself. It has been crafted with a singular purpose: to facilitate the creation of HTML templates via Java code.
+Spring HTML Generator is a simple and lightweight Java application that empowers you to create HTML pages using the Builder pattern. This application is deliberately minimalistic, with no external dependencies other than Java itself. It has been crafted with a singular purpose: to facilitate the creation of HTML templates via Java code.
 
 ## Table of Contents
 
@@ -19,21 +19,21 @@ Java HTML Builder is a simple and lightweight Java application that empowers you
 
 - **Lightweight**: This application is designed to be minimalistic and lightweight, ensuring that it doesn't introduce unnecessary complexity to your project.
 
-- **Dependency-Free**: You won't need to manage any external dependencies when using Java HTML Builder. It relies solely on Java, making it easy to integrate into your existing Java projects.
+- **Dependency-Free**: You won't need to manage any external dependencies when using Spring HTML Generator. It relies solely on Java, making it easy to integrate into your existing Java projects.
 
 ## Use Cases
 
-Java HTML Builder can be incredibly useful in various scenarios where you need to generate and serve HTML content from your backend:
+Spring HTML Generator can be incredibly useful in various scenarios where you need to generate and serve HTML content from your backend:
 
 1. **Composing HTML Emails**: When you need to compose HTML emails dynamically and send them from your backend, this library simplifies the task by providing a structured way to create HTML templates.
 
-2. **Serving HTML Pages**: If your application serves HTML pages directly from the backend, Java HTML Builder streamlines the process, making your code cleaner and more maintainable.
+2. **Serving HTML Pages**: If your application serves HTML pages directly from the backend, Spring HTML Generator streamlines the process, making your code cleaner and more maintainable.
 
-3. **Improving Readability**: Traditional approaches to generating HTML content within Java code often result in convoluted and hard-to-maintain code. Java HTML Builder is designed with readability in mind, making it easier for developers to understand and maintain.
+3. **Improving Readability**: Traditional approaches to generating HTML content within Java code often result in convoluted and hard-to-maintain code. Spring HTML Generator is designed with readability in mind, making it easier for developers to understand and maintain.
 
 ## Getting Started
 
-To get started with Java HTML Builder, follow these steps:
+To get started with Spring HTML Generator, follow these steps:
 
 1. **Clone the Repository**: Clone this repository to your local machine.
 
