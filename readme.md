@@ -39,11 +39,7 @@ To get started with Spring HTML Generator, follow these steps:
 
    ```shell
    https://github.com/gyawaliamit7/spring-html-generator.git
-   ```# Socket Programming with Java
-
-Socket Programming helps us to communicate with various computers running on a network. In Java, Socket programming can be either connection-oriented or connectionless. This project focuses on designing a connection-oriented application using the Client-Server model.
-
-In the Client-Server model, the Server has a unique IP Address and port number. The client attempts to establish a connection with the server using this port number and IP address. The server listens and accepts the connection. Once the connection is established, the Server can receive messages from the client and respond back to the client.
+   ```
 
 ## Examples
 
@@ -126,8 +122,73 @@ public static String buildTable() {
 
 This code will result for creating tables that will look like below.
 ```html
-<!DOCTYPE html> <html><head></head><body><table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;"><tr ><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr></table></body></html>
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;">
+      <tr>
+        <th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th>
+        <th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th>
+        <th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+    </table>
+  </body>
+</html>
 ```
+<html>
+  <head></head>
+  <body>
+    <table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;">
+      <tr>
+        <th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th>
+        <th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th>
+        <th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+      <tr style="padding:15px;text-align:center;">
+        <td>testData1</td>
+        <td>testData2</td>
+        <td>testData3</td>
+      </tr>
+    </table>
+  </body>
+</html>
+
 
 ### Creating Links
 The above links will help you create links using spring-html-generator
@@ -149,8 +210,23 @@ String htmlContent = HtmlBuilder
 ```
 This code will generate corresponding html code that will create links and will look like below.
 ```html
-<!DOCTYPE html> <html><head></head><body><a href ="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a></body></html>
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <a href="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a>
+  </body>
+</html>
 ```
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <a href="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a>
+  </body>
+</html>
+
+
 ### Creating Paragraphs
 
 ```java
@@ -171,11 +247,22 @@ String htmlContent = HtmlBuilder
 return htmlContent;
 ```
 The above links will help you create paragraphs which will look like:
-
-
 ```html
-<!DOCTYPE html> <html><head></head><body><p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p></body></html>
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p>
+  </body>
+</html>
 ```
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p>
+  </body>
+</html>
 
 [..I will be adding more examples in the future ]
 ##  About Contribution
