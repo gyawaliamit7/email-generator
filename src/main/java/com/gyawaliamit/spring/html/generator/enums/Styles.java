@@ -1,4 +1,4 @@
-package com.gyawaliamit.spring.html.generator.builder.enums;
+package com.gyawaliamit.spring.html.generator.enums;
 
 public enum Styles {
 

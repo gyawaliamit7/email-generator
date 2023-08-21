@@ -1,4 +1,4 @@
-package com.gyawaliamit.spring.html.generator.builder.constants;
+package com.gyawaliamit.spring.html.generator.constants;
 
 public class HtmlConstants {
 

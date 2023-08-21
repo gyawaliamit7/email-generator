@@ -1,6 +1,6 @@
-package com.gyawaliamit.spring.html.generator.builder.util;
+package com.gyawaliamit.spring.html.generator.util;
 
-import com.gyawaliamit.spring.html.generator.builder.enums.Styles;
+import com.gyawaliamit.spring.html.generator.enums.Styles;
 
 import java.util.List;
 import java.util.Map;

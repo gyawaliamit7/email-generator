@@ -1,31 +1,26 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags;
 
 import com.gyawaliamit.spring.html.generator.builder.body.BodyTags;
-import com.gyawaliamit.spring.html.generator.builder.enums.Styles;
-import com.gyawaliamit.spring.html.generator.builder.util.Pair;
-import com.gyawaliamit.spring.html.generator.builder.util.StyleUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.gyawaliamit.spring.html.generator.enums.Styles;
+import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
+import com.gyawaliamit.spring.html.generator.util.Pair;
 
 public class AhrefBuilder implements BodyTags {
 
     private StringBuilder content;
     private Pair<String,String> urlPair;
-    private List<Styles> stylesList;
-    private Map<String, String> customStyles;
+    private StyleHandler styleHandler;
 
 
-    public AhrefBuilder(StringBuilder content) {
+    public AhrefBuilder(StringBuilder content, StyleHandler styleHandler) {
+        this.styleHandler = styleHandler;
         this.content = content;
     }
 
 
     public AhrefBuilder build() {
         this.content.append("<a href =\"").append(urlPair.getKey()).append("\" ");
-        StyleUtil.buildStyles(this.content,stylesList, customStyles);
+        styleHandler.buildStyles(this.content);
         this.content.append(">");
         this.content.append(urlPair.getValue());
         this.content.append("</a>");
@@ -35,7 +30,8 @@ public class AhrefBuilder implements BodyTags {
 
 
     public static AhrefBuilder builder() {
-        return new AhrefBuilder(new StringBuilder());
+        StyleHandler styleHandler = new StyleHandler();
+        return new AhrefBuilder(new StringBuilder(),styleHandler);
     }
 
     public AhrefBuilder ahref(String url,String info) {
@@ -43,23 +39,19 @@ public class AhrefBuilder implements BodyTags {
         return this;
     }
 
-    public AhrefBuilder style(Styles style) {
-        if(this.stylesList == null) {
-            this.stylesList = new ArrayList<>();
-        }
-        this.stylesList.add(style);
-        return this;
-    }
 
     public String getContent() {
         return content.toString();
     }
 
     public AhrefBuilder customStyle(String key, String value) {
-        if(this.customStyles == null) {
-            this.customStyles = new HashMap<>();
-        }
-        this.customStyles.put(key,value);
+        styleHandler.customStyles(key, value);
+        return this;
+    }
+
+
+    public AhrefBuilder style(Styles style) {
+        styleHandler.style(style);
         return this;
     }
 }

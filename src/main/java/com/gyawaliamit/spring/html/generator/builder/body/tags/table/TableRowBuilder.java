@@ -1,28 +1,26 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags.table;
 
-import com.gyawaliamit.spring.html.generator.builder.enums.Styles;
-import com.gyawaliamit.spring.html.generator.builder.util.StyleUtil;
+import com.gyawaliamit.spring.html.generator.enums.Styles;
+import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TableRowBuilder {
     private StringBuilder content;
-    private List<Styles> stylesList;
-    private Map<String, String> customStyles;
     private List<TableHeadBuilder> tableHeadBuilderList;
     private List<TableDataBuilder> tableDataBuilderList;
+    private StyleHandler styleHandler;
 
 
-    public TableRowBuilder(StringBuilder content) {
+    public TableRowBuilder(StringBuilder content, StyleHandler styleHandler) {
         this.content = content;
+        this.styleHandler = styleHandler;
     }
 
     public TableRowBuilder build() {
         this.content.append("<tr ");
-        StyleUtil.buildStyles(this.content,stylesList, customStyles);
+        styleHandler.buildStyles(this.content);
         this.content.append(">");
         if(tableHeadBuilderList != null) {
             tableHeadBuilderList.stream().forEach(tableHeadBuilder -> this.content.append(tableHeadBuilder.getContent()));
@@ -34,7 +32,8 @@ public class TableRowBuilder {
         return this;
     }
     public static TableRowBuilder builder() {
-        return new TableRowBuilder(new StringBuilder());
+        StyleHandler styleHandler = new StyleHandler();
+        return new TableRowBuilder(new StringBuilder(),styleHandler);
     }
 
     public TableRowBuilder tableHeader(TableHeadBuilder tableHeadBuilder) {
@@ -58,19 +57,13 @@ public class TableRowBuilder {
     }
 
     public TableRowBuilder customStyle(String key, String value) {
-        if(this.customStyles == null) {
-            this.customStyles = new HashMap<>();
-        }
-        this.customStyles.put(key,value);
+        styleHandler.customStyles(key, value);
         return this;
     }
 
 
     public TableRowBuilder style(Styles style) {
-        if(this.stylesList == null) {
-            this.stylesList = new ArrayList<>();
-        }
-        this.stylesList.add(style);
+        styleHandler.style(style);
         return this;
     }
 }

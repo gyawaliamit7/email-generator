@@ -1,38 +1,34 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags.table;
 
-import com.gyawaliamit.spring.html.generator.builder.enums.Styles;
-import com.gyawaliamit.spring.html.generator.builder.util.StyleUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.gyawaliamit.spring.html.generator.enums.Styles;
+import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
 
 public class TableHeadBuilder {
     private StringBuilder content;
-    private List<Styles> stylesList;
-    private Map<String, String> customStyles;
+    private StyleHandler styleHandler;
     private String data;
 
 
-    public TableHeadBuilder(StringBuilder content) {
+    public TableHeadBuilder(StringBuilder content, StyleHandler styleHandler) {
         this.content = content;
+        this.styleHandler = styleHandler;
     }
 
     public TableHeadBuilder build() {
         this.content.append("<th ");
-        StyleUtil.buildStyles(this.content,stylesList, customStyles);
+        styleHandler.buildStyles(this.content);
         this.content.append(">");
         this.content.append(data);
         this.content.append("</th>");
-        return new TableHeadBuilder(content);
+        return new TableHeadBuilder(content, styleHandler);
     }
     public static TableHeadBuilder builder() {
-        return new TableHeadBuilder(new StringBuilder());
+        StyleHandler styleHandler = new StyleHandler();
+        return new TableHeadBuilder(new StringBuilder(),styleHandler);
     }
 
-    public TableHeadBuilder data(String paragraph) {
-        this.data = paragraph;
+    public TableHeadBuilder data(String data) {
+        this.data = data;
         return this;
 
     }
@@ -42,19 +38,13 @@ public class TableHeadBuilder {
     }
 
     public TableHeadBuilder customStyle(String key, String value) {
-        if(this.customStyles == null) {
-            this.customStyles = new HashMap<>();
-        }
-        this.customStyles.put(key,value);
+        styleHandler.customStyles(key, value);
         return this;
     }
 
 
     public TableHeadBuilder style(Styles style) {
-        if(this.stylesList == null) {
-            this.stylesList = new ArrayList<>();
-        }
-        this.stylesList.add(style);
+        styleHandler.style(style);
         return this;
     }
 }

@@ -2,7 +2,7 @@ package com.gyawaliamit.spring.html.generator.builder.body;
 
 import com.gyawaliamit.spring.html.generator.builder.body.tags.*;
 import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableBuilder;
-import com.gyawaliamit.spring.html.generator.builder.enums.Heading;
+import com.gyawaliamit.spring.html.generator.enums.Heading;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
 
 import java.util.LinkedList;
@@ -48,7 +48,6 @@ public class BodyBuilder {
 
     public BodyBuilder div(DivBuilder divBuilder) {
         this.divBuilder = divBuilder;
-     //   return new BodyBuilder(content,titleBuilder);
         return null;
     }
 
