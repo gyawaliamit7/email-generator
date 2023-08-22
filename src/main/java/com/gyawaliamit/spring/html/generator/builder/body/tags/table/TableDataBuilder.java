@@ -1,20 +1,14 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags.table;
 
 import com.gyawaliamit.spring.html.generator.builder.body.BodyTags;
-import com.gyawaliamit.spring.html.generator.builder.body.tags.AhrefBuilder;
-import com.gyawaliamit.spring.html.generator.builder.body.tags.HeadingBuilder;
-import com.gyawaliamit.spring.html.generator.builder.body.tags.ImageBuilder;
-import com.gyawaliamit.spring.html.generator.builder.body.tags.ParagraphBuilder;
+import com.gyawaliamit.spring.html.generator.builder.body.tags.*;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
 import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
 import com.gyawaliamit.spring.html.generator.handler.AttributesHandler;
 import com.gyawaliamit.spring.html.generator.handler.Handler;
 import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 public class TableDataBuilder {
     private StringBuilder content;
@@ -90,11 +84,20 @@ public class TableDataBuilder {
         return this;
     }
 
+
     public TableDataBuilder paragraph(ParagraphBuilder paragraphBuilder) {
         if(this.bodyTags  == null) {
             this.bodyTags = new LinkedList<>();
         }
         this.bodyTags.add(paragraphBuilder);
+        return this;
+    }
+
+    public TableDataBuilder paragraphList(List<ParagraphBuilder> paragraphBuilderList) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.addAll(paragraphBuilderList);
         return this;
     }
 

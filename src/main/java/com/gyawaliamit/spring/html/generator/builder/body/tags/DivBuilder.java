@@ -2,6 +2,7 @@ package com.gyawaliamit.spring.html.generator.builder.body.tags;
 
 import com.gyawaliamit.spring.html.generator.builder.body.BodyTags;
 import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableBuilder;
+import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableDataBuilder;
 import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
 import com.gyawaliamit.spring.html.generator.enums.Heading;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
@@ -15,8 +16,9 @@ public class DivBuilder implements BodyTags {
 
     private Queue<BodyTags> bodyTags;
     private StringBuilder content;
-    private List<HeadingBuilder> headingBuilder;
     private Map<String,Handler> handlers;
+    private String divContent;
+
 
 
     public DivBuilder(StringBuilder content, Queue<BodyTags> bodyTags, Map<String, Handler> styleHandler) {
@@ -39,11 +41,15 @@ public class DivBuilder implements BodyTags {
         this.handlers.forEach((key,handler) -> {
             handler.handle(this.content);
         });
+        this.content.append(">");
 
         if(bodyTags != null) {
             for (BodyTags bodyTag : bodyTags) {
                 content.append(bodyTag.getContent());
             }
+        }
+        if (this.divContent != null) {
+            content.append(this.divContent);
         }
         content.append("</div>");
         return this;
@@ -58,8 +64,11 @@ public class DivBuilder implements BodyTags {
         return this;
     }
 
-    public DivBuilder heading(HeadBuilder headBuilder, Heading headingConstants) {
-        this.headingBuilder = headingBuilder;
+    public DivBuilder heading(HeadingBuilder headingBuilder) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.add(headingBuilder);
         return this;
     }
 
@@ -71,6 +80,10 @@ public class DivBuilder implements BodyTags {
         return this;
     }
 
+    public DivBuilder content(String content) {
+        this.divContent = content;
+        return this;
+    }
 
     public DivBuilder ahref(AhrefBuilder ahrefBuilder) {
         if(this.bodyTags  == null) {
@@ -85,6 +98,14 @@ public class DivBuilder implements BodyTags {
             this.bodyTags = new LinkedList<>();
         }
         this.bodyTags.add(tableBuilder);
+        return this;
+    }
+
+    public DivBuilder image(ImageBuilder imageBuilder) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.add(imageBuilder);
         return this;
     }
 
@@ -103,6 +124,22 @@ public class DivBuilder implements BodyTags {
     public DivBuilder attribute(String key, String value) {
         Handler handler = this.handlers.get(HtmlConstants.ATTRIBUTE);
         handler.addItem(key,value);
+        return this;
+    }
+
+    public DivBuilder paragraphList(List<ParagraphBuilder> paragraphBuilderList) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.addAll(paragraphBuilderList);
+        return this;
+    }
+
+    public DivBuilder divList(List<DivBuilder> divBuilder) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.addAll(divBuilder);
         return this;
     }
 
