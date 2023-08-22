@@ -1,31 +1,34 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags.table;
 
 import com.gyawaliamit.spring.html.generator.builder.body.BodyTags;
-import com.gyawaliamit.spring.html.generator.enums.Styles;
+import com.gyawaliamit.spring.html.generator.builder.body.tags.AhrefBuilder;
+import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
+import com.gyawaliamit.spring.html.generator.handler.AttributesHandler;
+import com.gyawaliamit.spring.html.generator.handler.Handler;
 import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TableBuilder implements BodyTags {
 
     private StringBuilder content;
     private List<TableRowBuilder> tableRowBuilderList;
-    private StyleHandler styleHandler;
-    private String border;
+    private Map<String, Handler> handlers;
 
 
-    public TableBuilder(StringBuilder content, StyleHandler styleHandler) {
+    public TableBuilder(StringBuilder content,Map<String, Handler> handler) {
         this.content = content;
-        this.styleHandler = styleHandler;
+        this.handlers = handler;
     }
 
     public TableBuilder build() {
         this.content.append("<table ");
-        if(this.border != null) {
-            this.content.append("border=").append(border);
-        }
-        styleHandler.buildStyles(this.content);
+        this.handlers.forEach((key,handler) -> {
+            handler.handle(this.content);
+        });
         this.content.append(">");
 //
         if(tableRowBuilderList != null) {
@@ -35,11 +38,13 @@ public class TableBuilder implements BodyTags {
             });
         }
         this.content.append("</table>");
-        return new TableBuilder(content, styleHandler);
+        return this;
     }
     public static TableBuilder builder() {
-        StyleHandler styleHandler = new StyleHandler();
-        return new TableBuilder(new StringBuilder(), styleHandler);
+        Map<String,Handler> handlers = new HashMap<>();
+        handlers.put(HtmlConstants.STYLE, new StyleHandler());
+        handlers.put(HtmlConstants.ATTRIBUTE, new AttributesHandler());
+        return new TableBuilder(new StringBuilder(), handlers);
     }
 
     public TableBuilder tableRow(TableRowBuilder tableRowBuilder) {
@@ -55,21 +60,15 @@ public class TableBuilder implements BodyTags {
         return content.toString();
     }
 
-
-    public TableBuilder border(String border) {
-        this.border = border;
+    public TableBuilder style(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.STYLE);
+        handler.addItem(key,value);
         return this;
     }
 
-
-    public TableBuilder customStyle(String key, String value) {
-        styleHandler.customStyles(key, value);
-        return this;
-    }
-
-
-    public TableBuilder style(Styles style) {
-        styleHandler.style(style);
+    public TableBuilder attribute(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.ATTRIBUTE);
+        handler.addItem(key,value);
         return this;
     }
 }

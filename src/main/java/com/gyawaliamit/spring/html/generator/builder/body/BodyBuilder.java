@@ -16,11 +16,7 @@ public class BodyBuilder {
 
     private Queue<BodyTags> bodyTags;
     private StringBuilder content;
-    private DivBuilder divBuilder;
     private List<HeadingBuilder> headingBuilder;
-    private List<ParagraphBuilder> paragraphBuilder;
-    private TableBuilder tableBuilder;
-    private AhrefBuilder ahrefBuilder;
 
     public BodyBuilder(StringBuilder content, Queue<BodyTags> bodyTags) {
         this.bodyTags = bodyTags;
@@ -47,8 +43,11 @@ public class BodyBuilder {
     }
 
     public BodyBuilder div(DivBuilder divBuilder) {
-        this.divBuilder = divBuilder;
-        return null;
+        if(this.bodyTags == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.add(divBuilder);
+        return this;
     }
 
     public BodyBuilder heading(HeadBuilder headBuilder, Heading headingConstants) {
@@ -61,7 +60,7 @@ public class BodyBuilder {
             this.bodyTags = new LinkedList<>();
         }
         this.bodyTags.add(paragraphBuilder);
-        return new BodyBuilder(content,bodyTags);
+        return this;
     }
 
 
@@ -70,7 +69,7 @@ public class BodyBuilder {
             this.bodyTags = new LinkedList<>();
         }
         this.bodyTags.add(ahrefBuilder);
-        return new BodyBuilder(content,bodyTags);
+        return this;
     }
 
     public BodyBuilder table(TableBuilder tableBuilder) {
@@ -78,7 +77,7 @@ public class BodyBuilder {
             this.bodyTags = new LinkedList<>();
         }
         this.bodyTags.add(tableBuilder);
-        return new BodyBuilder(content,bodyTags);
+        return this;
     }
 
 

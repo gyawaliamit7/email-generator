@@ -1,26 +1,32 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags.table;
 
-import com.gyawaliamit.spring.html.generator.enums.Styles;
+import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
+import com.gyawaliamit.spring.html.generator.handler.AttributesHandler;
+import com.gyawaliamit.spring.html.generator.handler.Handler;
 import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TableRowBuilder {
     private StringBuilder content;
     private List<TableHeadBuilder> tableHeadBuilderList;
     private List<TableDataBuilder> tableDataBuilderList;
-    private StyleHandler styleHandler;
+    private Map<String, Handler> handlers;
 
 
-    public TableRowBuilder(StringBuilder content, StyleHandler styleHandler) {
+    public TableRowBuilder(StringBuilder content, Map<String, Handler> handler) {
         this.content = content;
-        this.styleHandler = styleHandler;
+        this.handlers = handler;
     }
 
     public TableRowBuilder build() {
         this.content.append("<tr ");
-        styleHandler.buildStyles(this.content);
+        this.handlers.forEach((key,handler) -> {
+            handler.handle(this.content);
+        });
         this.content.append(">");
         if(tableHeadBuilderList != null) {
             tableHeadBuilderList.stream().forEach(tableHeadBuilder -> this.content.append(tableHeadBuilder.getContent()));
@@ -32,8 +38,10 @@ public class TableRowBuilder {
         return this;
     }
     public static TableRowBuilder builder() {
-        StyleHandler styleHandler = new StyleHandler();
-        return new TableRowBuilder(new StringBuilder(),styleHandler);
+        Map<String,Handler> handlers = new HashMap<>();
+        handlers.put(HtmlConstants.STYLE, new StyleHandler());
+        handlers.put(HtmlConstants.ATTRIBUTE, new AttributesHandler());
+        return new TableRowBuilder(new StringBuilder(),handlers);
     }
 
     public TableRowBuilder tableHeader(TableHeadBuilder tableHeadBuilder) {
@@ -56,14 +64,16 @@ public class TableRowBuilder {
         return content.toString();
     }
 
-    public TableRowBuilder customStyle(String key, String value) {
-        styleHandler.customStyles(key, value);
+
+    public TableRowBuilder style(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.STYLE);
+        handler.addItem(key,value);
         return this;
     }
 
-
-    public TableRowBuilder style(Styles style) {
-        styleHandler.style(style);
+    public TableRowBuilder attribute(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.ATTRIBUTE);
+        handler.addItem(key,value);
         return this;
     }
 }

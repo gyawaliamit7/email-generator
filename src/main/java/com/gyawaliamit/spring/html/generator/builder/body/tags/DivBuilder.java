@@ -2,9 +2,11 @@ package com.gyawaliamit.spring.html.generator.builder.body.tags;
 
 import com.gyawaliamit.spring.html.generator.builder.body.BodyTags;
 import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableBuilder;
+import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
 import com.gyawaliamit.spring.html.generator.enums.Heading;
-import com.gyawaliamit.spring.html.generator.enums.Styles;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
+import com.gyawaliamit.spring.html.generator.handler.AttributesHandler;
+import com.gyawaliamit.spring.html.generator.handler.Handler;
 import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
 
 import java.util.*;
@@ -13,30 +15,35 @@ public class DivBuilder implements BodyTags {
 
     private Queue<BodyTags> bodyTags;
     private StringBuilder content;
-    private DivBuilder divBuilder;
     private List<HeadingBuilder> headingBuilder;
-    private List<ParagraphBuilder> paragraphBuilder;
-    private TableBuilder tableBuilder;
-    private AhrefBuilder ahrefBuilder;
-    private StyleHandler styleHandler;
+    private Map<String,Handler> handlers;
 
 
-    public DivBuilder(StringBuilder content, Queue<BodyTags> bodyTags, StyleHandler styleHandler) {
+    public DivBuilder(StringBuilder content, Queue<BodyTags> bodyTags, Map<String, Handler> styleHandler) {
         this.bodyTags = bodyTags;
         this.content = content;
-        this.styleHandler = styleHandler;
+        this.handlers = styleHandler;
     }
 
 
     public static DivBuilder builder() {
-        StyleHandler styleHandler = new StyleHandler();
-        return new DivBuilder(new StringBuilder("<div>"), null,styleHandler);
+        Map<String,Handler> handlers = new HashMap<>();
+        handlers.put(HtmlConstants.STYLE, new StyleHandler());
+        handlers.put(HtmlConstants.ATTRIBUTE, new AttributesHandler());
+        return new DivBuilder(new StringBuilder(), null,handlers);
     }
 
 
     public DivBuilder build() {
-        for(BodyTags bodyTag : bodyTags) {
-            content.append(bodyTag.getContent());
+        this.content.append("<div ");
+        this.handlers.forEach((key,handler) -> {
+            handler.handle(this.content);
+        });
+
+        if(bodyTags != null) {
+            for (BodyTags bodyTag : bodyTags) {
+                content.append(bodyTag.getContent());
+            }
         }
         content.append("</div>");
         return this;
@@ -44,7 +51,10 @@ public class DivBuilder implements BodyTags {
     }
 
     public DivBuilder div(DivBuilder divBuilder) {
-        this.divBuilder = divBuilder;
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.add(divBuilder);
         return this;
     }
 
@@ -84,14 +94,15 @@ public class DivBuilder implements BodyTags {
     }
 
 
-    public DivBuilder customStyle(String key, String value) {
-        styleHandler.customStyles(key, value);
+    public DivBuilder style(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.STYLE);
+        handler.addItem(key,value);
         return this;
     }
 
-
-    public DivBuilder style(Styles style) {
-        styleHandler.style(style);
+    public DivBuilder attribute(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.ATTRIBUTE);
+        handler.addItem(key,value);
         return this;
     }
 

@@ -1,30 +1,40 @@
 package com.gyawaliamit.spring.html.generator.builder.body.tags.table;
 
-import com.gyawaliamit.spring.html.generator.enums.Styles;
+import com.gyawaliamit.spring.html.generator.builder.body.tags.AhrefBuilder;
+import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
+import com.gyawaliamit.spring.html.generator.handler.AttributesHandler;
+import com.gyawaliamit.spring.html.generator.handler.Handler;
 import com.gyawaliamit.spring.html.generator.handler.StyleHandler;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TableHeadBuilder {
     private StringBuilder content;
-    private StyleHandler styleHandler;
+    private Map<String, Handler> handlers;
     private String data;
 
 
-    public TableHeadBuilder(StringBuilder content, StyleHandler styleHandler) {
+    public TableHeadBuilder(StringBuilder content, Map<String, Handler> handler) {
         this.content = content;
-        this.styleHandler = styleHandler;
+        this.handlers = handler;
     }
 
     public TableHeadBuilder build() {
         this.content.append("<th ");
-        styleHandler.buildStyles(this.content);
+        this.handlers.forEach((key,handler) -> {
+            handler.handle(this.content);
+        });
         this.content.append(">");
         this.content.append(data);
         this.content.append("</th>");
-        return new TableHeadBuilder(content, styleHandler);
+        return this;
     }
     public static TableHeadBuilder builder() {
-        StyleHandler styleHandler = new StyleHandler();
-        return new TableHeadBuilder(new StringBuilder(),styleHandler);
+        Map<String,Handler> handlers = new HashMap<>();
+        handlers.put(HtmlConstants.STYLE, new StyleHandler());
+        handlers.put(HtmlConstants.ATTRIBUTE, new AttributesHandler());
+        return new TableHeadBuilder(new StringBuilder(),handlers);
     }
 
     public TableHeadBuilder data(String data) {
@@ -36,15 +46,15 @@ public class TableHeadBuilder {
     public String getContent() {
         return content.toString();
     }
-
-    public TableHeadBuilder customStyle(String key, String value) {
-        styleHandler.customStyles(key, value);
+    public TableHeadBuilder style(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.STYLE);
+        handler.addItem(key,value);
         return this;
     }
 
-
-    public TableHeadBuilder style(Styles style) {
-        styleHandler.style(style);
+    public TableHeadBuilder attribute(String key, String value) {
+        Handler handler = this.handlers.get(HtmlConstants.ATTRIBUTE);
+        handler.addItem(key,value);
         return this;
     }
 }
