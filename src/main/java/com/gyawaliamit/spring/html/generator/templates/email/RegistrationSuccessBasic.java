@@ -8,12 +8,26 @@ import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableDataBu
 import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableRowBuilder;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
 import com.gyawaliamit.spring.html.generator.enums.Heading;
+import com.gyawaliamit.spring.html.generator.templates.model.Content;
 
-public class SuccessfulRegistration {
+import java.util.List;
+import java.util.stream.Collectors;
 
+public class RegistrationSuccessBasic implements Template<Content> {
 
-    public static void main(String[] args) {
-        String htmlContent = HtmlBuilder
+    @Override
+    public String generate(Content content) {
+
+        List<ParagraphBuilder> paragraphBuilderList = content.getDescription().stream().map(item -> ParagraphBuilder.builder()
+                .style("style", "color: #555;")
+                .paragraph(item)
+                .build()).collect(Collectors.toList());
+        List<ParagraphBuilder> footerList = content.getFooterNotes().stream().map(item -> ParagraphBuilder.builder()
+                .style("style", "color: #555;")
+                .paragraph(item)
+                .build()).collect(Collectors.toList());
+
+        return HtmlBuilder
                 .builder()
                 .head(HeadBuilder
                         .builder()
@@ -39,36 +53,22 @@ public class SuccessfulRegistration {
                                                                                 .attribute("align", "center")
                                                                                 .style("style", "padding: 20px;")
                                                                                 .image(ImageBuilder.builder()
-                                                                                        .src("https://images.unsplash.com/photo-1563694983011-6f4d90358083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80", "image caption")
-                                                                                        .attribute("alt", "main logo")
+                                                                                        .src(content.getImageUrl(), content.getImageContent())
+                                                                                        .attribute("alt", content.getImageContent())
                                                                                         .attribute("width", "200")
                                                                                         .attribute("height", "auto")
                                                                                         .style("style", "display: block;")
                                                                                         .build())
                                                                                 .heading(HeadingBuilder.builder()
                                                                                         .style("style", "color: #333;")
-                                                                                        .heading("Welcome to our Community", Heading.HEADING_1)
+                                                                                        .heading(content.getTitle(), Heading.HEADING_1)
                                                                                         .build())
-                                                                                .paragraph(ParagraphBuilder.builder()
-                                                                                        .style("style", "color: #555;")
-                                                                                        .paragraph("Thank you for registering with us. Your account has been successfully created.")
-                                                                                        .build())
-                                                                                .paragraph(ParagraphBuilder.builder()
-                                                                                        .style("style", "color: #555;")
-                                                                                        .paragraph("To get started, please click the button below:")
-                                                                                        .build())
+                                                                                .paragraphList(paragraphBuilderList)
                                                                                 .ahref(AhrefBuilder.builder()
                                                                                         .style("style", "display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 3px;")
-                                                                                        .ahref("https://www.example.com", "Get Started")
+                                                                                        .ahref(content.getImageUrl(), content.getButtonContent())
                                                                                         .build())
-                                                                                .paragraph(ParagraphBuilder.builder()
-                                                                                        .style("style", "color: #555;")
-                                                                                        .paragraph("If you have any questions or need assistance, feel free to contact us.")
-                                                                                        .build())
-                                                                                .paragraph(ParagraphBuilder.builder()
-                                                                                        .style("style", "color: #555;")
-                                                                                        .paragraph("Best regards,<br> Your Company Name ")
-                                                                                        .build())
+                                                                                .paragraphList(footerList)
                                                                                 .build())
 
                                                                 .build())
@@ -78,7 +78,5 @@ public class SuccessfulRegistration {
                                 .build())
                         .build())
                 .build();
-
-
     }
 }

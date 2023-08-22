@@ -6,10 +6,13 @@ import com.gyawaliamit.spring.html.generator.builder.body.tags.*;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
 import com.gyawaliamit.spring.html.generator.builder.head.TitleBuilder;
 import com.gyawaliamit.spring.html.generator.enums.Heading;
+import com.gyawaliamit.spring.html.generator.templates.model.Content;
 
-public class NewsLetterTemplate {
-    public static void main(String[] args) {
-        String htmlContent = HtmlBuilder.builder()
+public class NewsLetterBasicTemplate implements Template<Content> {
+
+    @Override
+    public String generate(Content content) {
+        return HtmlBuilder.builder()
                 .head(HeadBuilder.builder()
                         .title(TitleBuilder.builder().title("News Letter").build())
                         .build())
@@ -43,9 +46,7 @@ public class NewsLetterTemplate {
                                 .build())
                         .build())
                 .build();
-
-
-        System.out.println(htmlContent);
     }
+
 }
 
