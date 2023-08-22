@@ -41,7 +41,6 @@ To get started with Spring HTML Generator, follow these steps:
    https://github.com/gyawaliamit7/spring-html-generator.git
    ```
 
-
 ## Examples
 
 ### HTML Email Template - Successful User Registration
