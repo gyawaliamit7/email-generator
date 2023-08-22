@@ -112,7 +112,7 @@ public static String buildTable() {
                                     .customStyle("text-align", "center")
                                     .tableData(TableDataBuilder.builder().data("testData3").build())
                                     .build())
-                            .build())
+                            .build()
                     .build())
             .build();
     return htmlContent;
