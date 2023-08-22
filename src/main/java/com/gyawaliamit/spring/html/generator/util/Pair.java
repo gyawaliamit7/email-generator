@@ -1,4 +1,4 @@
-package com.gyawaliamit.spring.html.generator.builder.util;
+package com.gyawaliamit.spring.html.generator.util;
 
 public class Pair<K, V> {
     private final K key;
