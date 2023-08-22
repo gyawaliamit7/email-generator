@@ -10,8 +10,8 @@ Spring HTML Generator is a simple and lightweight Java application that empowers
 - [Use Cases](#use-cases)
 - [Getting Started](#getting-started)
 - [Example](#example)
-- [Contributing](#contributing)
-- [License](#license)
+- [Templates](#templates)
+- [Contributing](#about-contribution)
 
 ## Features
 
@@ -29,7 +29,7 @@ Spring HTML Generator can be incredibly useful in various scenarios where you ne
 
 2. **Serving HTML Pages**: If your application serves HTML pages directly from the backend, Spring HTML Generator streamlines the process, making your code cleaner and more maintainable.
 
-3. **Improving Readability**: Traditional approaches to generating HTML content within Java code often result in convoluted and hard-to-maintain code. Spring HTML Generator is designed with readability in mind, making it easier for developers to understand and maintain.
+3. **Improving Readability**: Traditional approaches to generating HTML content within Java code often result in convoluted and hard-to-maintain code. Spring HTML Generator is designed with readability, making it easier for developers to understand and maintain.
 
 ## Getting Started
 
@@ -39,142 +39,155 @@ To get started with Spring HTML Generator, follow these steps:
 
    ```shell
    https://github.com/gyawaliamit7/spring-html-generator.git
-   ```
 
 
-## Examples
+## Example
+### Building  Paragraphs
+```java
+ParagraphBuilder paragraphBuilder = ParagraphBuilder.builder().paragraph("This is just simple Paragraph").build();
+String paragraphContent = HtmlBuilder.builder().body(BodyBuilder.builder().paragraph(paragraphBuilder).build()).build();
+```
 
-### Creating Tables
-The following code will help to generate html content for tables using custom syles.
+### Building  Links
+```java
+AhrefBuilder ahrefBuilder = AhrefBuilder.builder().ahref("#", "url details").build();
+String ahrefContent = HtmlBuilder.builder().body(BodyBuilder.builder().ahref(ahrefBuilder).build()).build();
+```
+
+### Building Images
+```java
+ImageBuilder imageBuilder = ImageBuilder.builder().src("https://images.unsplash.com/photo-1682685797332-e678a04f8a64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60", "image details").build();
+String imageContent = HtmlBuilder.builder().body(BodyBuilder.builder().image(imageBuilder).build()).build();
+```
+
+### Building Headings
+```java
+HeadingBuilder headingBuilder = HeadingBuilder.builder().heading("heading content", Heading.HEADING_1).build();
+String headingContent = HtmlBuilder.builder().body(BodyBuilder.builder().heading(headingBuilder).build()).build();
+```
+
+### Styling
 
 ```java
-public static String buildTable() {
-    String htmlContent = HtmlBuilder
-            .builder()
-            .head(HeadBuilder
-                    .builder()
-                    .build())
-            .body(BodyBuilder.builder()
-                    .table(TableBuilder.builder()
-                            .customStyle("border-collapse", "collapse")
-                            .customStyle("width", "80%")
-                            .customStyle("margin", "auto")
-                            .customStyle("border-radius", "8px")
-                            .customStyle("overflow", "hidden")
-                            .customStyle("box-shadow", "0 0 10px rgba(0, 0, 0, 0.2)")
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 1").build())
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 2").build())
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .customStyle("background-color", "#f2f2f2")
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .customStyle("background-color", "#f2f2f2")
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .build()
-                    .build())
-            .build();
-    return htmlContent;
+ ImageBuilder imageBuilder = ImageBuilder.builder()
+                .src("https://via.placeholder.com/600x200", "placeholder")
+                .attribute("alt", "placeholder")
+                .attribute("width", "200")
+                .attribute("height", "auto")
+                .style("style", "display: block;")
+                .build();
+String imageContent = HtmlBuilder.builder().body(BodyBuilder.builder().image(imageBuilder).build()).build();
+```
+
+## Templates
+
+### HTML Email Template - Successful User Registration
+
+![Email Template Screenshot](https://github.com/gyawaliamit7/spring-html-generator/assets/34220616/3c1c6099-9f57-4c1f-8148-6d56673b822f)
+
+This is an example of an HTML email template sent to users after successfully creating an account. It provides a clean and basic layout.
+
+if you directly want to use this template in your code. Here is a sample code that you can use to use the template
+```java
+public static void main(String[] args) {
+
+    // Generate registration HTML
+    Template registrationTemplate = TemplateFactory.getTemplate(TemplateName.REGISTRATION_SUCCSS_BASIC);
+    String html = registrationTemplate.generate(generateRegistrationContent());
+    System.out.println(html);
 }
+
+ public static Content generateRegistrationContent() {
+        Content content = new Content();
+        content.setTitle("Welcome to Our Portal");
+
+        List<String> descriptionList = new ArrayList<>();
+        descriptionList.add("Thank you for registering with us. Your account has been successfully registered.");
+        descriptionList.add("Please feel free to reach out to us for any questions or concerns regarding our services.");
+        descriptionList.add("To get started, please click the button below:");
+        content.setButtonContent("Get Started");
+        content.setButtonLink("https://images.unsplash.com");
+        content.setDescription(descriptionList);
+        content.setImageUrl("https://images.unsplash.com/photo-1563694983011-6f4d90358083?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80");
+        content.setImageContent("Image Caption");
+
+        List<String> footerNotes = new ArrayList<>();
+        footerNotes.add("If you have any questions or need assistance, feel free to contact us.");
+        footerNotes.add("Best regards,<br> Your Company Name ");
+        content.setFooterNotes(footerNotes);
+        return content;
+    }
 ```
 
+You can find the complete source code for this HTML email template in the following Java class:
 
+[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
 
-This code will result for creating tables that will look like below.
-```html
-<!DOCTYPE html> <html><head></head><body><table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;"><tr ><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr></table></body></html>
-```
+Feel free to use this template as a starting point for your own email notifications.
 
-### Creating Links
-The above links will help you create links using spring-html-generator
+### HTML Email Template - Email Newsletter
+![Email Newsletter Template](https://github.com/gyawaliamit7/spring-html-generator/assets/34220616/aca3ad45-3721-4c84-8e81-0e174ba186cd)
+
+This is an example of a simple Email newsletter template where you can send company news or recent updates.
+
+if you directly want to use this template in your code. Here is a sample code that you can use to use the template
 ```java
-String htmlContent = HtmlBuilder
-        .builder()
-        .head(HeadBuilder
-                .builder()
-                .build())
-        .body(BodyBuilder.builder()
-                .ahref(AhrefBuilder.builder()
-                        .ahref("https://gyawaliamit.com/", "Test Link 2")
-                        .style(Styles.COLOR_RED)
-                        .style(Styles.TEXT_CENTER)
-                        .customStyle("font-size", "18px")
-                        .build())
-                .build())
-        .build();
-```
-This code will generate corresponding html code that will create links and will look like below.
-```html
-<!DOCTYPE html> <html><head></head><body><a href ="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a></body></html>
-```
-### Creating Paragraphs
+public static void main(String[] args) {
 
-```java
-String htmlContent = HtmlBuilder
-    .builder()
-    .head(HeadBuilder
-        .builder()
-        .build())
-    .body(BodyBuilder.builder()
-        .paragraph(ParagraphBuilder.builder()
-            .paragraph("This is just a first paragraph")
-            .style(Styles.COLOR_RED)
-            .style(Styles.TEXT_CENTER)
-            .customStyle("font-size", "18px")
-            .build())
-        .build())
-    .build();
-return htmlContent;
+        Template newsletterTemplate = TemplateFactory.getTemplate(TemplateName.NEWSLETTER_BASIC);
+        String newsletterHtml = newsletterTemplate.generate(generateNewsLetterContent());
+        System.out.println(newsletterHtml);
+}
+
+  private static Content generateNewsLetterContent() {
+        Content mainContent = new Content();
+        mainContent.setTitle("Your Newsletter");
+
+        List<Content> featureContent = getFeatureContents();
+        mainContent.setContentList(featureContent);
+        mainContent.setFooterButtonContent("Unsubscribe");
+        mainContent.setFooterButtonContentLink("#");
+        List<String> footerNotes = new ArrayList<>();
+        footerNotes.add("&copy; 2023 Your Company |  ");
+        mainContent.setFooterNotes(footerNotes);
+        return mainContent;
+    }
+
+    private static List<Content> getFeatureContents() {
+        List<Content> contents = new ArrayList<>();
+        contents.add(new Content(
+                "Sample Content 1",
+                Arrays.asList("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+                "Learn More",
+                "https://example.com/learnmore1",
+                "https://via.placeholder.com/600x200",
+                "Image 1",
+                "Footer Button",
+                "https://example.com/footerbutton1"
+        ));
+        contents.add(new Content(
+                "Sample Content 2",
+                Arrays.asList("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"),
+                "Click Here",
+                "https://example.com/clickhere",
+                "https://via.placeholder.com/600x200",
+                null,
+                "Footer Action",
+                "https://example.com/footeraction"
+        ));
+
+        return contents;
+    }
 ```
-The above links will help you create paragraphs which will look like:
 
+You can find the complete source code for this HTML email template in the following Java class:
 
-```html
-<!DOCTYPE html> <html><head></head><body><p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p></body></html>
-```
+[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
 
-[..I will be adding more examples in the future ]
+Feel free to use this template as a starting point for your own email notifications.
+
+> ℹ️ **Note:** More templates will be added in the future.
+
 ##  About Contribution
 Since this is an open-source project, if you want some sort of feature enhancement or to fix a bug, please feel free to raise an issue or create a pull request and help maintain the project.
 
