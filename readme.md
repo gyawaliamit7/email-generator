@@ -44,137 +44,21 @@ To get started with Spring HTML Generator, follow these steps:
 
 ## Examples
 
-### Creating Tables
-The following code will help to generate html content for tables using custom syles.
+### HTML Email Template - Successful User Registration
 
-```java
-public static String buildTable() {
-    String htmlContent = HtmlBuilder
-            .builder()
-            .head(HeadBuilder
-                    .builder()
-                    .build())
-            .body(BodyBuilder.builder()
-                    .table(TableBuilder.builder()
-                            .customStyle("border-collapse", "collapse")
-                            .customStyle("width", "80%")
-                            .customStyle("margin", "auto")
-                            .customStyle("border-radius", "8px")
-                            .customStyle("overflow", "hidden")
-                            .customStyle("box-shadow", "0 0 10px rgba(0, 0, 0, 0.2)")
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 1").build())
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 2").build())
-                                    .tableHeader(TableHeadBuilder.builder()
-                                            .customStyle("padding", "15px")
-                                            .customStyle("text-align", "center")
-                                            .customStyle("background-color", "#333")
-                                            .customStyle("color", "#fff")
-                                            .data("Title 3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .customStyle("background-color", "#f2f2f2")
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .customStyle("background-color", "#f2f2f2")
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .tableRow(TableRowBuilder.builder()
-                                    .tableData(TableDataBuilder.builder().data("testData1").build())
-                                    .tableData(TableDataBuilder.builder().data("testData2").build())
-                                    .customStyle("padding", "15px")
-                                    .customStyle("text-align", "center")
-                                    .tableData(TableDataBuilder.builder().data("testData3").build())
-                                    .build())
-                            .build()
-                    .build())
-            .build();
-    return htmlContent;
-}
-```
+![Email Template Screenshot](https://github.com/gyawaliamit7/spring-html-generator/assets/34220616/9a892200-fb86-4ebc-9a19-81f0ba83ca47)
+
+This is an example of an HTML email template that is sent to users after they successfully create an account. It provides a clean and professional layout.
+
+You can find the complete source code for this HTML email template in the following Java class:
+
+[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
+
+Feel free to use this template as a starting point for your own email notifications.
 
 
+> ℹ️ **Note:** I will be adding more examples in the future.
 
-This code will result for creating tables that will look like below.
-```html
-<!DOCTYPE html> <html><head></head><body><table style="border-radius:8px;box-shadow:0 0 10px rgba(0, 0, 0, 0.2);margin:auto;overflow:hidden;width:80%;border-collapse:collapse;"><tr ><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 1</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 2</th><th style="background-color:#333;padding:15px;color:#fff;text-align:center;">Title 3</th></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr><tr style="padding:15px;text-align:center;"><td >testData1</td><td >testData2</td><td >testData3</td></tr></table></body></html>
-```
-
-### Creating Links
-The above links will help you create links using spring-html-generator
-```java
-String htmlContent = HtmlBuilder
-        .builder()
-        .head(HeadBuilder
-                .builder()
-                .build())
-        .body(BodyBuilder.builder()
-                .ahref(AhrefBuilder.builder()
-                        .ahref("https://gyawaliamit.com/", "Test Link 2")
-                        .style(Styles.COLOR_RED)
-                        .style(Styles.TEXT_CENTER)
-                        .customStyle("font-size", "18px")
-                        .build())
-                .build())
-        .build();
-```
-This code will generate corresponding html code that will create links and will look like below.
-```html
-<!DOCTYPE html> <html><head></head><body><a href ="https://gyawaliamit.com/" style="color: red;text-align: center;font-size:18px;">Test Link 2</a></body></html>
-```
-### Creating Paragraphs
-
-```java
-String htmlContent = HtmlBuilder
-    .builder()
-    .head(HeadBuilder
-        .builder()
-        .build())
-    .body(BodyBuilder.builder()
-        .paragraph(ParagraphBuilder.builder()
-            .paragraph("This is just a first paragraph")
-            .style(Styles.COLOR_RED)
-            .style(Styles.TEXT_CENTER)
-            .customStyle("font-size", "18px")
-            .build())
-        .build())
-    .build();
-return htmlContent;
-```
-The above links will help you create paragraphs which will look like:
-
-
-```html
-<!DOCTYPE html> <html><head></head><body><p style="color: red;text-align: center;font-size:18px;">This is just a first paragraph</p></body></html>
-```
-
-[..I will be adding more examples in the future ]
 ##  About Contribution
 Since this is an open-source project, if you want some sort of feature enhancement or to fix a bug, please feel free to raise an issue or create a pull request and help maintain the project.
 
