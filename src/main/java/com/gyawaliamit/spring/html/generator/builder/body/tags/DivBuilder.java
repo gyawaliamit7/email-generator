@@ -2,6 +2,7 @@ package com.gyawaliamit.spring.html.generator.builder.body.tags;
 
 import com.gyawaliamit.spring.html.generator.builder.body.BodyTags;
 import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableBuilder;
+import com.gyawaliamit.spring.html.generator.builder.body.tags.table.TableDataBuilder;
 import com.gyawaliamit.spring.html.generator.constants.HtmlConstants;
 import com.gyawaliamit.spring.html.generator.enums.Heading;
 import com.gyawaliamit.spring.html.generator.builder.head.HeadBuilder;
@@ -123,6 +124,22 @@ public class DivBuilder implements BodyTags {
     public DivBuilder attribute(String key, String value) {
         Handler handler = this.handlers.get(HtmlConstants.ATTRIBUTE);
         handler.addItem(key,value);
+        return this;
+    }
+
+    public DivBuilder paragraphList(List<ParagraphBuilder> paragraphBuilderList) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.addAll(paragraphBuilderList);
+        return this;
+    }
+
+    public DivBuilder divList(List<DivBuilder> divBuilder) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.addAll(divBuilder);
         return this;
     }
 

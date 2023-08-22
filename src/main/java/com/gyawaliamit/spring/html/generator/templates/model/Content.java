@@ -11,7 +11,31 @@ public class Content {
     private String imageUrl;
     private String imageContent;
     private List<String> footerNotes;
+    private List<Content> contentList;
+    private String footerButtonContent;
+    private String footerButtonContentLink;
 
+    public Content( ) {
+    }
+
+    public Content(String title, List<String> description, String buttonContent, String buttonLink, String imageUrl, String imageContent, String footerButtonContent, String footerButtonContentLink) {
+        this.title = title;
+        this.description = description;
+        this.buttonContent = buttonContent;
+        this.buttonLink = buttonLink;
+        this.imageUrl = imageUrl;
+        this.imageContent = imageContent;
+        this.footerButtonContent = footerButtonContent;
+        this.footerButtonContentLink = footerButtonContentLink;
+    }
+
+    public List<Content> getContentList() {
+        return contentList;
+    }
+
+    public void setContentList(List<Content> contentList) {
+        this.contentList = contentList;
+    }
 
     public List<String> getFooterNotes() {
         return footerNotes;
@@ -67,5 +91,21 @@ public class Content {
 
     public void setButtonLink(String buttonLink) {
         this.buttonLink = buttonLink;
+    }
+
+    public String getFooterButtonContent() {
+        return footerButtonContent;
+    }
+
+    public void setFooterButtonContent(String footerButtonContent) {
+        this.footerButtonContent = footerButtonContent;
+    }
+
+    public String getFooterButtonContentLink() {
+        return footerButtonContentLink;
+    }
+
+    public void setFooterButtonContentLink(String footerButtonContentLink) {
+        this.footerButtonContentLink = footerButtonContentLink;
     }
 }

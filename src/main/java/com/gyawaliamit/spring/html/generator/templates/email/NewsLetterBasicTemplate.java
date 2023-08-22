@@ -8,10 +8,39 @@ import com.gyawaliamit.spring.html.generator.builder.head.TitleBuilder;
 import com.gyawaliamit.spring.html.generator.enums.Heading;
 import com.gyawaliamit.spring.html.generator.templates.model.Content;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class NewsLetterBasicTemplate implements Template<Content> {
 
     @Override
     public String generate(Content content) {
+
+
+        List<DivBuilder> divBuilders = content.getContentList().stream().map(item -> {
+            List<ParagraphBuilder> paragraphBuilderList = item.getDescription().stream().map(item2 -> ParagraphBuilder.builder()
+                    .style("style", "color: #555;")
+                    .paragraph(item2)
+                    .build()).collect(Collectors.toList());
+
+            return DivBuilder.builder()
+                    .style("style", "padding: 20px;")
+                    .image(ImageBuilder.builder()
+                            .src(item.getImageUrl(), item.getImageContent())
+                            .style("style", "max-width: 100%; height: auto;")
+                            .build())
+                    .heading(HeadingBuilder.builder().style("style", "font-size: 20px; margin-top: 20px;").heading(item.getTitle(), Heading.HEADING_2).build())
+                    .paragraphList(paragraphBuilderList)
+                    .ahref(AhrefBuilder.builder().style("style", "display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 5px;")
+                            .ahref(item.getButtonLink(), item.getButtonContent()).build())
+                    .build();
+
+        }).collect(Collectors.toList());
+
+        List<ParagraphBuilder> footerList = content.getFooterNotes().stream().map(item -> ParagraphBuilder.builder()
+                .paragraph(item)
+                .build()).collect(Collectors.toList());
+
         return HtmlBuilder.builder()
                 .head(HeadBuilder.builder()
                         .title(TitleBuilder.builder().title("News Letter").build())
@@ -22,26 +51,14 @@ public class NewsLetterBasicTemplate implements Template<Content> {
                                 .style("style", "max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff;")
                                 .div(DivBuilder.builder()
                                         .style("style", "text-align: center; background-color: #007bff; padding: 20px;")
-                                        .heading(HeadingBuilder.builder().heading("Your Newsletter", Heading.HEADING_1).build())
+                                        .heading(HeadingBuilder.builder().heading(content.getTitle(), Heading.HEADING_1).build())
                                         .build())
-                                .div(DivBuilder.builder()
-                                        .style("style", "padding: 20px;")
-                                        .image(ImageBuilder.builder()
-                                                .src("https://via.placeholder.com/600x200", "link")
-                                                .style("style", "max-width: 100%; height: auto;")
-                                                .build())
-                                        .heading(HeadingBuilder.builder().style("style", "font-size: 20px; margin-top: 20px;").heading("Featured Article", Heading.HEADING_2).build())
-                                        .paragraph(ParagraphBuilder.builder().style("style", "font-size: 16px; line-height: 1.5; margin-top: 10px;")
-                                                .paragraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-                                                .build())
-                                        .ahref(AhrefBuilder.builder().style("style", "display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 5px;")
-                                                .ahref("#", "Read More").build())
-                                        .build())
+                                .divList(divBuilders)
                                 .div(DivBuilder.builder()
                                         .style("style", "text-align: center; padding: 20px; background-color: #007bff; color: #ffffff;")
-                                        .content(" &copy; 2023 Your Company | ")
+                                        .paragraphList(footerList)
                                         .ahref(AhrefBuilder.builder().style("style", "color: #ffffff; text-decoration: none;")
-                                                .ahref("#", " Unsubscribe ").build())
+                                                .ahref(content.getFooterButtonContentLink(), content.getFooterButtonContent()).build())
                                         .build())
                                 .build())
                         .build())
