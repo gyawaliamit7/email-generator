@@ -35,10 +35,15 @@ Spring HTML Generator can be incredibly useful in various scenarios where you ne
 
 To get started with Spring HTML Generator, follow these steps:
 
-1. **Clone the Repository**: Clone this repository to your local machine.
+1. **Add Dependency**: Add the following dependency in your project.
 
-   ```shell
-   https://github.com/gyawaliamit7/spring-html-generator.git
+```xml
+<dependency>
+   <groupId>com.gyawaliamit</groupId>
+   <artifactId>spring-html-generator</artifactId>
+   <version>1.0.0</version>
+</dependency>
+```
 
 
 ## Example
