@@ -7,7 +7,35 @@
     <groupId>com.gyawaliamit</groupId>
     <artifactId>spring-html-generator</artifactId>
     <version>1.0.0</version>
+    <name>spring-html-generator</name>
+    <description>Spring HTML Generator is a simple and lightweight Java application that empowers you to create HTML pages using the Builder pattern. This application is deliberately minimalistic, with no external dependencies other than Java itself. It has been crafted with a singular purpose: to facilitate the creation of HTML templates via Java code.
+    </description>
+    <url>http://gyawaliamit.com</url>
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>https://github.com/gyawaliamit7/spring-html-generator/blob/main/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
+    <developers>
+        <developer>
+            <id>gyawaliamit</id>
+            <name>Amit Gyawali</name>
+            <email>gyawaliamit99@gmail.com</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/gyawaliamit7/spring-html-generator.git</connection>
+        <developerConnection>scm:git:git://github.com/gyawaliamit7/spring-html-generator.git</developerConnection>
+        <url>https://github.com/gyawaliamit7/spring-html-generator</url>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -33,13 +61,20 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>1.6.8</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.thoughtworks.xstream</groupId>
+                        <artifactId>xstream</artifactId>
+                        <version>1.4.15</version> <!-- apparently this needs to be exactly this version -->
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
