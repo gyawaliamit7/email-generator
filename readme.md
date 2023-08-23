@@ -35,10 +35,15 @@ Spring HTML Generator can be incredibly useful in various scenarios where you ne
 
 To get started with Spring HTML Generator, follow these steps:
 
-1. **Clone the Repository**: Clone this repository to your local machine.
+1. **Add Dependency**: Add the following dependency in your project.
 
-   ```shell
-   https://github.com/gyawaliamit7/spring-html-generator.git
+```xml
+<dependency>
+   <groupId>com.gyawaliamit</groupId>
+   <artifactId>spring-html-generator</artifactId>
+   <version>1.0.0</version>
+</dependency>
+```
 
 
 ## Example
@@ -121,7 +126,7 @@ public static void main(String[] args) {
 
 You can find the complete source code for this HTML email template in the following Java class:
 
-[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
+[RegistrationSuccessBasic.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/RegistrationSuccessBasic.java)
 
 Feel free to use this template as a starting point for your own email notifications.
 
@@ -182,7 +187,7 @@ public static void main(String[] args) {
 
 You can find the complete source code for this HTML email template in the following Java class:
 
-[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
+[NewsLetterBasicTemplate.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/NewsLetterBasicTemplate.java)
 
 Feel free to use this template as a starting point for your own email notifications.
 
