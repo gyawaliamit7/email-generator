@@ -18,7 +18,6 @@ public class BodyBuilder {
 
     private Queue<BodyTags> bodyTags;
     private StringBuilder content;
-    private List<HeadingBuilder> headingBuilder;
     private Map<String, Handler> handlers;
 
     public BodyBuilder(StringBuilder content, Queue<BodyTags> bodyTags, Map<String, Handler> styleHandler) {
@@ -64,9 +63,12 @@ public class BodyBuilder {
         return this;
     }
 
-    public BodyBuilder heading(HeadBuilder headBuilder, Heading headingConstants) {
-        this.headingBuilder = headingBuilder;
-        return null;
+    public BodyBuilder heading(HeadingBuilder headBuilder) {
+        if(this.bodyTags == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.add(headBuilder);
+        return this;
     }
 
     public BodyBuilder paragraph(ParagraphBuilder paragraphBuilder) {
@@ -83,6 +85,14 @@ public class BodyBuilder {
             this.bodyTags = new LinkedList<>();
         }
         this.bodyTags.add(ahrefBuilder);
+        return this;
+    }
+
+    public BodyBuilder image(ImageBuilder imageBuilder) {
+        if(this.bodyTags  == null) {
+            this.bodyTags = new LinkedList<>();
+        }
+        this.bodyTags.add(imageBuilder);
         return this;
     }
 

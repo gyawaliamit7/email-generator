@@ -121,7 +121,7 @@ public static void main(String[] args) {
 
 You can find the complete source code for this HTML email template in the following Java class:
 
-[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
+[RegistrationSuccessBasic.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/RegistrationSuccessBasic.java)
 
 Feel free to use this template as a starting point for your own email notifications.
 
@@ -182,7 +182,7 @@ public static void main(String[] args) {
 
 You can find the complete source code for this HTML email template in the following Java class:
 
-[SuccessfulRegistration.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/SuccessfulRegistration.java)
+[NewsLetterBasicTemplate.java](src/main/java/com/gyawaliamit/spring/html/generator/templates/email/NewsLetterBasicTemplate.java)
 
 Feel free to use this template as a starting point for your own email notifications.
 
